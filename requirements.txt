@@ -2,3 +2,4 @@ jprops
 sphinx
 sphinx_rtd_theme
 matplotlib
+importlib_resources

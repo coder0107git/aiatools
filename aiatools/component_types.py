@@ -10,7 +10,7 @@ online development environment.
 import json
 import xml.etree.ElementTree as ETree
 
-import pkg_resources
+import importlib_resources
 
 from aiatools.selectors import Selector, NamedCollection, Selectors
 from .common import *
@@ -265,8 +265,8 @@ def _load_component_types(filename, use_type=False):
     Loads the descriptions of App Inventor components from simple_components.json and populates the module with
     instances of ComponentType for each known type.
     """
-    with open(pkg_resources.resource_filename('aiatools', filename)) as _f:
-        _component_descriptors = json.load(_f)
+    with importlib_resources.files('aiatools').joinpath('simple_components.json') as _f:
+        _component_descriptors = json.loads(_f.read_text())
         for _descriptor in _component_descriptors:
             _component = component_from_descriptor(_descriptor)
             name = _component.type if use_type else _component.name
